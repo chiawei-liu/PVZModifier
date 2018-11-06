@@ -48,7 +48,13 @@ include funcs.inc
    offset3 dd ?
    alTestCmd db "alTest", 0
    setSunCmd db "setSun", 0
+   zombieCmd db "zombie", 0
+   godBeanCmd db "godBean", 0
+   freePlantsCmd db "freePlants", 0
+   overlapPlantsCmd db "overlapPlants", 0
+   invincibleZombiesCmd db "invincibleZombies", 0
    askCmd db "Enter command: ", 0
+
 
 .data?
    buffer    dd 9876
@@ -86,7 +92,32 @@ L1:
 	.if ZERO?
         INVOKE setSun, hProcess
     .endif
-	;call ReadInt
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR zombieCmd
+	.if ZERO?
+        INVOKE zombie, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR godBeanCmd
+	.if ZERO?
+        INVOKE godBean, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR freePlantsCmd
+	.if ZERO?
+        INVOKE freePlants, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR overlapPlantsCmd
+	.if ZERO?
+        INVOKE overlapPlants, hProcess
+    .endif
+	
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR invincibleZombiesCmd
+	.if ZERO?
+        INVOKE invincibleZombies, hProcess
+    .endif
+	
 
 	jmp L1
 	

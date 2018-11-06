@@ -129,9 +129,14 @@
     <None Include="funcs.inc" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="freePlants.asm" />
     <MASM Include="functest.asm" />
+    <MASM Include="godBean.asm" />
+    <MASM Include="invincibleZombies.asm" />
     <MASM Include="main.asm" />
+    <MASM Include="overlapPlants.asm" />
     <MASM Include="setSun.asm" />
+    <MASM Include="zombie.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

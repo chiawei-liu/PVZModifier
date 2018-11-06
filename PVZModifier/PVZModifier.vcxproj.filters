@@ -29,5 +29,20 @@
     <MASM Include="setSun.asm">
       <Filter>Source Files</Filter>
     </MASM>
+    <MASM Include="zombie.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="godBean.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="freePlants.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="overlapPlants.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="invincibleZombies.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

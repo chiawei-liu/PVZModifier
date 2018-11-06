@@ -21,4 +21,8 @@ includelib C:\Irvine\Irvine32.Lib
 	; self-defined functions
 	alTest PROTO
 	setSun PROTO, hProcess: DWORD
-	
+	zombie PROTO, hProcess: DWORD
+	godBean PROTO, hProcess: DWORD
+	freePlants PROTO, hProcess: DWORD
+	overlapPlants PROTO, hProcess: DWORD
+	invincibleZombies PROTO, hProcess: DWORD
