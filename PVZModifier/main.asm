@@ -28,12 +28,12 @@ includelib /masm32/lib/msvcrt.lib
 include funcs.inc
 
 .data 
-   hwnd      HANDLE ?
-   FWID      db "植物大战僵尸中文版", 0
-   dwProcId  dd ?
-   founded   byte "The Game has been founded", 0
+   hwnd HANDLE ?
+   FWID db "植物大战僵尸中文版", 0
+   dwProcId dd ?
+   founded byte "The Game has been founded", 0
    unrecCmd db "Unrecognized command. ", 0
-   hProcess      dd 0
+   hProcess dd 0
    cmdBuffer db 30 DUP(0)
    cmdAccept BYTE 0
    setSunCmd db "setSun", 0
@@ -49,17 +49,16 @@ include funcs.inc
    autoCollectCmd db "autoCollect", 0
    noCoolDownCmd db "noCoolDown", 0
    clearFirstRoundCmd db "clearFirstRound", 0
-
+   cmdList db "Command list: ", 10, 13, "    setSun", 10, 13, "    killAllZombies", 10, 13, "    godBean", 10, 13, "    freePlants", 10, 13, "    overlapPlants", 10, 13, "    invincibleZombies", 10, 13, "    freezeZombies", 10, 13, "    charmZombies", 10, 13, "    setLevel", 10, 13, "    autoCollect", 10, 13, "    noCoolDown", 10, 13, "    clearFirstRound", 10, 13, 10, 13, 0
 
    quitCmd db "quit", 0
-
-
-.data?
-   buffer    dd 9876
  
 .code
  
 main PROC
+
+	mov edx, OFFSET cmdList
+	call WriteString
 	
 	invoke FindWindowA, NULL, ADDR FWID; 
     test eax, eax
@@ -84,7 +83,7 @@ L1:
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR quitCmd
 	.if ZERO?
 		mov cmdAccept, 1
-        ret
+        jmp done
     .endif
 
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR setSunCmd
@@ -163,22 +162,19 @@ L1:
 		mov edx, OFFSET unrecCmd
 		call WriteString
 	.endif
-	
 
 	jmp L1
 	
-
-    invoke CloseHandle, hProcess 
-	;invoke dwtoa, hwnd, ADDR buffer; convert hwnd to string and store it into our buffer
-    ;invoke ExitProcess, NULL 
+    
     jmp done
                     
 error:
-    print "There was an error. Couldn't find the game. ",0,0
+    print "There was an error. Couldn't find the game. ", 10, 13, 0,0
     inkey
     ret
  
 done:
+	invoke CloseHandle, hProcess 
     ret
  
 main ENDP

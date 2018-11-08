@@ -12,8 +12,8 @@ include funcs.inc
     offset3 dd ?
 	autoOn BYTE 0EBh
 	autoOff BYTE 75h
-	nowOn db "Auto collect now on. ", 0
-	nowOff db "Auto collect now off. ", 0
+	nowOn db "Auto collect now on. ", 13, 10, 0
+	nowOff db "Auto collect now off. ", 13, 10, 0
 
 .code
 

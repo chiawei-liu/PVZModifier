@@ -12,8 +12,8 @@ include funcs.inc
     offset3 dd ?
 	noCDOff BYTE 89h, 45h, 24h, 89h, 45h, 28h, 88h, 45h, 49h
 	noCDOn BYTE 0C7h, 45h, 24h, 99h, 99h, 09h, 00h, 90h, 90h
-	nowOn db "No CD now on. ", 0
-	nowOff db "No CD now off. ", 0
+	nowOn db "No CD now on. ", 13, 10, 0
+	nowOff db "No CD now off. ", 13, 10, 0
 	slotNum dd 10
 	coolDown dd 0
 
