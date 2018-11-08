@@ -129,14 +129,20 @@
     <None Include="funcs.inc" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="autoCollect.asm" />
+    <MASM Include="charmZombies.asm" />
+    <MASM Include="clearFirstRound.asm" />
     <MASM Include="freePlants.asm" />
+    <MASM Include="freezeZombies.asm" />
     <MASM Include="functest.asm" />
     <MASM Include="godBean.asm" />
     <MASM Include="invincibleZombies.asm" />
     <MASM Include="main.asm" />
+    <MASM Include="noCoolDown.asm" />
     <MASM Include="overlapPlants.asm" />
+    <MASM Include="setLevel.asm" />
     <MASM Include="setSun.asm" />
-    <MASM Include="zombie.asm" />
+    <MASM Include="killAllZombies.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

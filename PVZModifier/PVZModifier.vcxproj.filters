@@ -29,9 +29,6 @@
     <MASM Include="setSun.asm">
       <Filter>Source Files</Filter>
     </MASM>
-    <MASM Include="zombie.asm">
-      <Filter>Source Files</Filter>
-    </MASM>
     <MASM Include="godBean.asm">
       <Filter>Source Files</Filter>
     </MASM>
@@ -42,6 +39,27 @@
       <Filter>Source Files</Filter>
     </MASM>
     <MASM Include="invincibleZombies.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="killAllZombies.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="setLevel.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="autoCollect.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="noCoolDown.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="freezeZombies.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="charmZombies.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="clearFirstRound.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>

@@ -19,10 +19,15 @@ includelib C:\Irvine\Irvine32.Lib
 	Str_compare PROTO, string1: PTR BYTE, string2: PTR BYTE
 
 	; self-defined functions
-	alTest PROTO
 	setSun PROTO, hProcess: DWORD
-	zombie PROTO, hProcess: DWORD
+	killAllZombies PROTO, hProcess: DWORD
 	godBean PROTO, hProcess: DWORD
 	freePlants PROTO, hProcess: DWORD
 	overlapPlants PROTO, hProcess: DWORD
 	invincibleZombies PROTO, hProcess: DWORD
+	freezeZombies PROTO, hProcess: DWORD
+	charmZombies PROTO, hProcess: DWORD
+	setLevel PROTO, hProcess: DWORD
+	autoCollect PROTO, hProcess: DWORD
+	noCoolDown PROTO, hProcess: DWORD
+	clearFirstRound PROTO, hProcess: DWORD

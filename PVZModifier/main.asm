@@ -29,31 +29,29 @@ include funcs.inc
 
 .data 
    hwnd      HANDLE ?
-   FWID      db "植物大战僵尸中文版",0 
-   MsgTitle  db "This is a messagebox",0
+   FWID      db "植物大战僵尸中文版", 0
    dwProcId  dd ?
-   founded   byte "The Game has been founded",0
-   OpenP     db ?
-   byteswritten dd ? 
-   score     dword  100000
-   Pointer   dword ?
-   dwNewValue    dd 99
-   dwOldProtect  dd 0
+   founded   byte "The Game has been founded", 0
+   unrecCmd db "Unrecognized command. ", 0
    hProcess      dd 0
-   cmdBuffer db 21 DUP(0)
-   sunVal  dd ?
-   sunOldVal dd ?
-   offset1 dd ?
-   offset2 dd ?
-   offset3 dd ?
-   alTestCmd db "alTest", 0
+   cmdBuffer db 30 DUP(0)
+   cmdAccept BYTE 0
    setSunCmd db "setSun", 0
-   zombieCmd db "zombie", 0
+   killAllZombiesCmd db "killAllZombies", 0
    godBeanCmd db "godBean", 0
    freePlantsCmd db "freePlants", 0
    overlapPlantsCmd db "overlapPlants", 0
    invincibleZombiesCmd db "invincibleZombies", 0
    askCmd db "Enter command: ", 0
+   freezeZombiesCmd db "freezeZombies", 0
+   charmZombiesCmd db "charmZombies", 0
+   setLevelCmd db "setLevel", 0
+   autoCollectCmd db "autoCollect", 0
+   noCoolDownCmd db "noCoolDown", 0
+   clearFirstRoundCmd db "clearFirstRound", 0
+
+
+   quitCmd db "quit", 0
 
 
 .data?
@@ -74,8 +72,8 @@ main PROC
  
     mov hProcess, eax
 
-	
 L1:
+	mov cmdAccept, 0
 	mov edx, OFFSET askCmd
 	call WriteString
 
@@ -83,40 +81,88 @@ L1:
 	mov ecx, SIZEOF cmdBuffer
 	call ReadString
 
-	INVOKE Str_compare, ADDR cmdBuffer, ADDR alTestCmd
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR quitCmd
 	.if ZERO?
-        call alTest
+		mov cmdAccept, 1
+        ret
     .endif
 
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR setSunCmd
 	.if ZERO?
+		mov cmdAccept, 1
         INVOKE setSun, hProcess
     .endif
 
-	INVOKE Str_compare, ADDR cmdBuffer, ADDR zombieCmd
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR killAllZombiesCmd
 	.if ZERO?
-        INVOKE zombie, hProcess
+		mov cmdAccept, 1
+        INVOKE killAllZombies, hProcess
     .endif
 
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR godBeanCmd
 	.if ZERO?
+		mov cmdAccept, 1
         INVOKE godBean, hProcess
     .endif
 
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR freePlantsCmd
 	.if ZERO?
+		mov cmdAccept, 1
         INVOKE freePlants, hProcess
     .endif
 
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR overlapPlantsCmd
 	.if ZERO?
+		mov cmdAccept, 1
         INVOKE overlapPlants, hProcess
     .endif
 	
 	INVOKE Str_compare, ADDR cmdBuffer, ADDR invincibleZombiesCmd
 	.if ZERO?
+		mov cmdAccept, 1
         INVOKE invincibleZombies, hProcess
     .endif
+	
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR freezeZombiesCmd
+	.if ZERO?
+		mov cmdAccept, 1
+        INVOKE freezeZombies, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR charmZombiesCmd
+	.if ZERO?
+		mov cmdAccept, 1
+        INVOKE charmZombies, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR setLevelCmd
+	.if ZERO?
+		mov cmdAccept, 1
+        INVOKE setLevel, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR autoCollectCmd
+	.if ZERO?
+		mov cmdAccept, 1
+        INVOKE autoCollect, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR noCoolDownCmd
+	.if ZERO?
+		mov cmdAccept, 1
+        INVOKE noCoolDown, hProcess
+    .endif
+
+	INVOKE Str_compare, ADDR cmdBuffer, ADDR clearFirstRoundCmd
+	.if ZERO?
+		mov cmdAccept, 1
+        INVOKE clearFirstRound, hProcess
+    .endif
+
+	.if cmdAccept == 0
+		mov edx, OFFSET unrecCmd
+		call WriteString
+	.endif
 	
 
 	jmp L1
@@ -124,12 +170,11 @@ L1:
 
     invoke CloseHandle, hProcess 
 	;invoke dwtoa, hwnd, ADDR buffer; convert hwnd to string and store it into our buffer
-    ;invoke MessageBox, NULL, addr MsgTitle, addr buffer, MB_OK ;dispay the handle in the window title bar
     ;invoke ExitProcess, NULL 
     jmp done
                     
 error:
-    print "There was an error",0,0
+    print "There was an error. Couldn't find the game. ",0,0
     inkey
     ret
  
